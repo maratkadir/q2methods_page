@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { isLocale } from "@/lib/i18n/config";
+
+type Props = { params: Promise<{ locale: string }> };
 
 export const metadata: Metadata = {
   title: "Impressum | Q2Methods",
@@ -6,7 +10,9 @@ export const metadata: Metadata = {
     "Impressum und Anbieterkennzeichnung der q²methods GmbH & Co. KG gemäß § 5 DDG.",
 };
 
-export default function ImpressumPage() {
+export default async function ImpressumPage({ params }: Props) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
   return (
     <div className="mx-auto w-full max-w-4xl px-6 py-16 md:px-10">
       <section className="rounded-2xl border border-slate-200 bg-white/90 p-8">

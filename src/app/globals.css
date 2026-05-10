@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0b1220;
+  --bg-color: #f7fafc;
+  --primary-text: #1a365d;
+  --navbar-bg: #2a4365;
+  --accent-color: #38a169;
+  --accent-text: #ffffff;
+  --secondary-text: #4a5568;
+  --background: var(--bg-color);
+  --foreground: var(--primary-text);
 }
 
 @theme inline {
@@ -13,27 +19,79 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--primary-text);
+  font-family: sans-serif;
+  margin: 0;
 }
 
 html,
 body {
-  background-color: #ffffff;
+  background-color: var(--bg-color);
 }
 
 .hero-grid {
-  background-color: #ffffff;
+  background-color: var(--bg-color);
   background-image:
-    linear-gradient(to right, rgba(148, 163, 184, 0.22) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.22) 1px, transparent 1px);
+    linear-gradient(to right, rgba(148, 163, 184, 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.16) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
 .neon-ring {
   box-shadow:
-    0 0 0 1px rgba(6, 182, 212, 0.25),
-    0 10px 25px rgba(14, 116, 144, 0.15),
-    inset 0 0 15px rgba(99, 102, 241, 0.06);
+    0 0 0 1px rgba(56, 161, 105, 0.24),
+    0 8px 20px rgba(56, 161, 105, 0.14);
+}
+
+.navbar {
+  background-color: var(--navbar-bg);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-name {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 20px;
+  opacity: 0.8;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+}
+
+.hero-title {
+  color: var(--primary-text);
+  font-size: 2.5rem;
+}
+
+.highlight {
+  color: var(--accent-color);
+}
+
+.btn-action {
+  background-color: var(--accent-color);
+  color: var(--accent-text);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.text-secondary {
+  color: var(--secondary-text);
+}
+
+.panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
 }
