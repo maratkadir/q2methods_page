@@ -54,7 +54,10 @@ export function AiChatWidget({ starterMessage, placeholder, labels }: Props) {
     const trimmed = input.trim();
     if (!trimmed || isLoading) return;
 
-    const nextMessages = [...messages, { role: "user" as const, content: trimmed }];
+    const nextMessages = [
+      ...messages,
+      { role: "user" as const, content: trimmed },
+    ];
     setMessages(nextMessages);
     setInput("");
     setError(null);
@@ -69,54 +72,84 @@ export function AiChatWidget({ starterMessage, placeholder, labels }: Props) {
 
       const data = (await response.json()) as { reply?: string; error?: string };
       const reply = data.reply;
-      if (!response.ok || !reply) throw new Error(data.error ?? resolvedLabels.chatFailed);
+      if (!response.ok || !reply)
+        throw new Error(data.error ?? resolvedLabels.chatFailed);
 
       setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
     } catch (err) {
-      setError(err instanceof Error ? err.message : resolvedLabels.unexpectedError);
+      setError(
+        err instanceof Error ? err.message : resolvedLabels.unexpectedError,
+      );
     } finally {
       setIsLoading(false);
     }
   }
 
   return (
-    <div className="panel rounded-2xl p-4 md:p-6">
-      <div className="max-h-[48vh] space-y-4 overflow-y-auto p-2">
+    <div className="panel relative rounded-2xl p-5 md:p-6">
+      <div className="mb-4 flex items-center justify-between border-b border-[var(--border-soft)] pb-3">
+        <p className="mono-tag mono-tag--accent">TWIN-SESSION</p>
+        <span className="num text-[0.7rem] text-[var(--secondary-text)]">
+          {String(messages.length).padStart(2, "0")} /
+          turns
+        </span>
+      </div>
+
+      <div className="max-h-[52vh] space-y-4 overflow-y-auto pr-1">
         {messages.map((message, index) => (
           <article
             key={`${message.role}-${index}`}
             className={
               message.role === "user"
                 ? "ml-auto max-w-3xl rounded-2xl bg-[var(--accent-color)] px-5 py-4 text-sm leading-7 text-[var(--accent-text)]"
-                : "mr-auto max-w-3xl rounded-2xl border border-[#e2e8f0] bg-white px-5 py-4 text-sm leading-7 text-[var(--primary-text)]"
+                : "mr-auto max-w-3xl rounded-2xl border border-[var(--border-soft)] bg-[var(--bg-color)] px-5 py-4 text-sm leading-7 text-[var(--primary-text)]"
             }
           >
+            {message.role === "assistant" && (
+              <p className="num mb-2 text-[0.68rem] uppercase tracking-[0.15em] text-[var(--accent-color)] opacity-70">
+                Q²-TWIN
+              </p>
+            )}
             {message.content}
           </article>
         ))}
-        {isLoading && <p className="text-secondary text-sm">{resolvedLabels.thinking}</p>}
+        {isLoading && (
+          <p className="text-secondary num text-xs">
+            <span className="terminal-bracket">→</span> {resolvedLabels.thinking}
+          </p>
+        )}
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-3">
+      <form
+        onSubmit={handleSubmit}
+        className="mt-6 flex flex-col gap-3 border-t border-[var(--border-soft)] pt-5"
+      >
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           rows={3}
           placeholder={resolvedPlaceholder}
-          className="w-full rounded-xl border border-[#e2e8f0] bg-white px-4 py-3 text-sm text-[var(--primary-text)] outline-none transition focus:border-[var(--accent-color)]"
+          className="input resize-y"
         />
         <div className="flex items-center justify-between gap-3">
-          <p className="text-secondary text-xs">{resolvedLabels.poweredBy}</p>
+          <p className="text-secondary num text-[0.7rem] uppercase tracking-[0.12em]">
+            {resolvedLabels.poweredBy}
+          </p>
           <button
             type="submit"
             disabled={isLoading || input.trim().length === 0}
-            className="btn-action rounded-full px-5 py-2.5 text-sm transition hover:brightness-105 disabled:cursor-not-allowed disabled:bg-slate-500"
+            className="btn-action"
           >
             {resolvedLabels.send}
+            <span className="num opacity-80">↗</span>
           </button>
         </div>
       </form>
-      {error && <p className="mt-3 text-sm text-rose-400">{error}</p>}
+      {error && (
+        <p className="num mt-3 text-sm text-[var(--negative)]">
+          <span className="terminal-bracket">!</span> {error}
+        </p>
+      )}
     </div>
   );
 }

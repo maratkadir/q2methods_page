@@ -27,6 +27,28 @@ export type Dictionary = {
     clientTypes: { title: string; subtitle: string; detail: string }[];
     deliverTitle: string;
     capabilities: { label: string; detail: string }[];
+    framework: { eyebrow: string };
+    sections: {
+      whoWeServe: string;
+      whatWeDeliver: string;
+      atAGlance: string;
+      selectedOutcomes: string;
+    };
+    whoWeServeIntro: string;
+    kpiLabels: [string, string, string, string];
+    outcomes: {
+      heading: string;
+      intro: string;
+      labels: [string, string, string, string];
+      view: string;
+    };
+    closingCta: {
+      eyebrow: string;
+      heading: string;
+      intro: string;
+      contact: string;
+      twin: string;
+    };
   };
   about: {
     metaTitle: string;

@@ -80,6 +80,43 @@ export const en: Dictionary = {
           "Use-case discovery, rapid MVP delivery, and controlled production integration",
       },
     ],
+    framework: {
+      eyebrow: "Frameworks covered",
+    },
+    sections: {
+      whoWeServe: "Who we serve",
+      whatWeDeliver: "What we deliver",
+      atAGlance: "At a glance",
+      selectedOutcomes: "Selected outcomes",
+    },
+    whoWeServeIntro:
+      "Three institutional segments, one quant discipline. Each engagement is shaped by the regulatory regime, governance cadence, and decision rhythm of the counterparty in front of us.",
+    kpiLabels: [
+      "Engagement themes",
+      "Senior partners",
+      "Regulatory frameworks",
+      "Geographic focus",
+    ],
+    outcomes: {
+      heading: "Measurable, anonymised, traceable to a mandate.",
+      intro:
+        "Each figure below is drawn from a real engagement on the projects page. We do not publish hypothetical results.",
+      labels: [
+        "AI surveillance FP reduction",
+        "Reporting cycle compression",
+        "Manual processing replaced",
+        "T+1 readiness programme",
+      ],
+      view: "View engagement →",
+    },
+    closingCta: {
+      eyebrow: "Start an engagement",
+      heading: "A 30-minute call is usually enough to scope the next step.",
+      intro:
+        "Pre-qualify with the AI Twin, or write to the partners directly. We respond within one business day.",
+      contact: "Contact partners",
+      twin: "Talk to AI Twin",
+    },
   },
   about: {
     metaTitle: "About Us | Q2Methods",

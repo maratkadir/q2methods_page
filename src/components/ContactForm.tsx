@@ -27,7 +27,8 @@ const FALLBACK_LABELS: Labels = {
   sending: "Sending…",
   send: "Send Message",
   successTitle: "Thank you.",
-  successBody: "We will review your message and respond within one business day.",
+  successBody:
+    "We will review your message and respond within one business day.",
   unexpectedError: "Unexpected error.",
   submissionFailed: "Submission failed.",
 };
@@ -73,31 +74,45 @@ export function ContactForm({ labels }: Props) {
 
   if (state === "success") {
     return (
-      <div className="panel rounded-2xl p-8 flex flex-col items-center justify-center text-center gap-3">
-        <p className="text-2xl font-semibold text-[var(--primary-text)]">{t.successTitle}</p>
+      <div className="panel neon-ring relative flex flex-col items-start justify-center gap-3 rounded-2xl p-10">
+        <span className="crosshair-corner crosshair-corner--tl" />
+        <span className="crosshair-corner crosshair-corner--tr" />
+        <span className="crosshair-corner crosshair-corner--bl" />
+        <span className="crosshair-corner crosshair-corner--br" />
+        <p className="mono-tag mono-tag--accent">STATUS: 200 OK</p>
+        <p className="mt-2 text-3xl font-semibold text-[var(--primary-text)]">
+          {t.successTitle}
+        </p>
         <p className="text-secondary text-sm leading-7">{t.successBody}</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="panel rounded-2xl p-8 space-y-5">
-      <h2 className="text-2xl font-semibold text-[var(--primary-text)]">{t.heading}</h2>
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="name" className="text-xs font-semibold tracking-[0.15em] text-[var(--accent-color)] uppercase">
+    <form
+      onSubmit={handleSubmit}
+      className="panel relative rounded-2xl p-8 md:p-10"
+    >
+      <div className="section-divider mb-8">
+        <span className="section-divider__index num">§ 02</span>
+        <span>{t.heading}</span>
+      </div>
+
+      <div className="grid gap-5 md:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="name"
+            className="num text-[0.7rem] uppercase tracking-[0.18em] text-[var(--accent-color)]"
+          >
             {t.nameLabel}
           </label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            required
-            className="rounded-xl border border-[#e2e8f0] bg-white px-4 py-3 text-sm text-[var(--primary-text)] outline-none transition focus:border-[var(--accent-color)]"
-          />
+          <input id="name" name="name" type="text" required className="input" />
         </div>
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="email" className="text-xs font-semibold tracking-[0.15em] text-[var(--accent-color)] uppercase">
+        <div className="flex flex-col gap-2">
+          <label
+            htmlFor="email"
+            className="num text-[0.7rem] uppercase tracking-[0.18em] text-[var(--accent-color)]"
+          >
             {t.emailLabel}
           </label>
           <input
@@ -105,23 +120,26 @@ export function ContactForm({ labels }: Props) {
             name="email"
             type="email"
             required
-            className="rounded-xl border border-[#e2e8f0] bg-white px-4 py-3 text-sm text-[var(--primary-text)] outline-none transition focus:border-[var(--accent-color)]"
+            className="input"
           />
         </div>
       </div>
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="company" className="text-xs font-semibold tracking-[0.15em] text-[var(--accent-color)] uppercase">
+
+      <div className="mt-5 flex flex-col gap-2">
+        <label
+          htmlFor="company"
+          className="num text-[0.7rem] uppercase tracking-[0.18em] text-[var(--accent-color)]"
+        >
           {t.companyLabel}
         </label>
-        <input
-          id="company"
-          name="company"
-          type="text"
-          className="rounded-xl border border-[#e2e8f0] bg-white px-4 py-3 text-sm text-[var(--primary-text)] outline-none transition focus:border-[var(--accent-color)]"
-        />
+        <input id="company" name="company" type="text" className="input" />
       </div>
-      <div className="flex flex-col gap-1.5">
-        <label htmlFor="message" className="text-xs font-semibold tracking-[0.15em] text-[var(--accent-color)] uppercase">
+
+      <div className="mt-5 flex flex-col gap-2">
+        <label
+          htmlFor="message"
+          className="num text-[0.7rem] uppercase tracking-[0.18em] text-[var(--accent-color)]"
+        >
           {t.messageLabel}
         </label>
         <textarea
@@ -129,17 +147,29 @@ export function ContactForm({ labels }: Props) {
           name="message"
           rows={5}
           required
-          className="w-full rounded-xl border border-[#e2e8f0] bg-white px-4 py-3 text-sm text-[var(--primary-text)] outline-none transition focus:border-[var(--accent-color)]"
+          className="input resize-y"
         />
       </div>
-      {state === "error" && <p className="text-sm text-rose-400">{errorMsg}</p>}
-      <button
-        type="submit"
-        disabled={state === "loading"}
-        className="btn-action rounded-full px-6 py-3 text-sm transition hover:brightness-105 disabled:cursor-not-allowed disabled:bg-slate-500"
-      >
-        {state === "loading" ? t.sending : t.send}
-      </button>
+
+      {state === "error" && (
+        <p className="num mt-4 text-sm text-[var(--negative)]">
+          <span className="terminal-bracket">!</span> {errorMsg}
+        </p>
+      )}
+
+      <div className="mt-8 flex items-center justify-between gap-3">
+        <p className="text-secondary num text-[0.7rem] uppercase tracking-[0.12em]">
+          Reply &lt; 24h
+        </p>
+        <button
+          type="submit"
+          disabled={state === "loading"}
+          className="btn-action neon-ring"
+        >
+          {state === "loading" ? t.sending : t.send}
+          <span className="num opacity-80">↗</span>
+        </button>
+      </div>
     </form>
   );
 }

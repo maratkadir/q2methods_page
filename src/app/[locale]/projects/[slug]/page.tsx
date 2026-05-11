@@ -33,97 +33,141 @@ export default async function ProjectDetailPage({ params }: Props) {
   const dict = (await getDictionary(locale)).projectDetail;
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-6 py-16 md:px-10">
-      <Link
-        href={`/${locale}/projects`}
-        className="inline-flex items-center gap-2 text-sm text-[var(--accent-color)] hover:underline"
-      >
-        {dict.backToProjects}
-      </Link>
-
-      <section className="panel mt-6 rounded-2xl p-8">
-        <div className="flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-full border border-[var(--accent-color)]/40 bg-[var(--navbar-bg)] px-3 py-0.5 text-xs font-semibold tracking-[0.15em] text-[var(--accent-color)] uppercase"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h1 className="mt-4 text-4xl font-semibold text-[var(--primary-text)] md:text-5xl">
-          {project.title}
-        </h1>
-        <p className="text-secondary mt-3 text-lg leading-8">{project.tagline}</p>
-        <p className="mt-2 text-sm text-[var(--accent-color)]">
-          {dict.clientType} {project.clientType}
-        </p>
-      </section>
-
-      <div className="mt-8 grid gap-6 lg:grid-cols-2">
-        <section className="panel rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-[var(--primary-text)]">
-            {dict.challengeTitle}
-          </h2>
-          <p className="text-secondary mt-4 text-sm leading-7">{project.challenge}</p>
-        </section>
-
-        <section className="panel rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-[var(--primary-text)]">
-            {dict.approachTitle}
-          </h2>
-          <p className="text-secondary mt-4 text-sm leading-7">{project.approach}</p>
-        </section>
-      </div>
-
-      <div className="mt-6 grid gap-6 lg:grid-cols-2">
-        <section className="panel rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-[var(--primary-text)]">
-            {dict.deliverablesTitle}
-          </h2>
-          <ul className="mt-4 space-y-3">
-            {project.deliverables.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 text-sm leading-7 text-[var(--primary-text)]"
-              >
-                <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--accent-color)]" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="panel rounded-2xl p-8">
-          <h2 className="text-xl font-semibold text-[var(--primary-text)]">
-            {dict.outcomesTitle}
-          </h2>
-          <ul className="mt-4 space-y-3">
-            {project.outcomes.map((item) => (
-              <li
-                key={item}
-                className="flex items-start gap-3 text-sm leading-7 text-[var(--primary-text)]"
-              >
-                <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-[var(--accent-color)]" />
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
-
-      <section className="panel mt-8 rounded-2xl p-6">
-        <p className="text-sm text-[var(--secondary-text)]">
-          {dict.cta}{" "}
-          <Link
-            href={`/${locale}/contacts`}
-            className="text-[var(--accent-color)] hover:underline"
+    <>
+      {/* ===================== HEADER ===================== */}
+      <div className="hero-grid hero-grid-fade">
+        <section className="relative mx-auto w-full max-w-7xl overflow-hidden px-6 py-16 md:px-10 md:py-20">
+          <span
+            aria-hidden="true"
+            className="glyph-watermark glyph-watermark--accent right-[-1rem] top-[-4rem] md:right-[4rem] md:top-[-5rem]"
           >
-            {dict.ctaLink}
+            β
+          </span>
+
+          <Link
+            href={`/${locale}/projects`}
+            className="link-accent num inline-flex items-center gap-2 text-xs"
+          >
+            {dict.backToProjects}
           </Link>
-        </p>
+
+          <div className="relative mt-8 max-w-5xl">
+            <div className="flex flex-wrap gap-x-4 gap-y-2">
+              {project.tags.map((tag) => (
+                <span key={tag} className="mono-tag mono-tag--accent">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <h1 className="hero-title mt-8">{project.title}</h1>
+
+            <p className="text-secondary mt-6 max-w-3xl text-lg leading-8">
+              {project.tagline}
+            </p>
+
+            <p className="num mt-6 text-xs text-[var(--accent-color)] opacity-90">
+              <span className="text-[var(--secondary-text)]">
+                {dict.clientType}
+              </span>{" "}
+              {project.clientType}
+            </p>
+          </div>
+        </section>
+      </div>
+
+      {/* ===================== CHALLENGE / APPROACH ===================== */}
+      <section className="border-t border-[var(--border-soft)] bg-[var(--bg-surface)]">
+        <div className="mx-auto w-full max-w-7xl px-6 py-20 md:px-10 md:py-24">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--border-soft)] lg:grid-cols-2">
+            <article className="bg-[var(--bg-surface)] p-8 md:p-10">
+              <div className="section-divider mb-6">
+                <span className="section-divider__index num">§ 01</span>
+                <span>{dict.challengeTitle}</span>
+              </div>
+              <p className="text-secondary text-base leading-8">
+                {project.challenge}
+              </p>
+            </article>
+
+            <article className="bg-[var(--bg-surface)] p-8 md:p-10">
+              <div className="section-divider mb-6">
+                <span className="section-divider__index num">§ 02</span>
+                <span>{dict.approachTitle}</span>
+              </div>
+              <p className="text-secondary text-base leading-8">
+                {project.approach}
+              </p>
+            </article>
+          </div>
+        </div>
       </section>
-    </div>
+
+      {/* ===================== DELIVERABLES / OUTCOMES ===================== */}
+      <section className="mx-auto w-full max-w-7xl px-6 py-20 md:px-10 md:py-24">
+        <div className="grid gap-8 lg:grid-cols-2">
+          <article className="panel rounded-2xl p-8 md:p-10">
+            <div className="section-divider mb-6">
+              <span className="section-divider__index num">§ 03</span>
+              <span>{dict.deliverablesTitle}</span>
+            </div>
+            <ol className="space-y-0 border-t border-[var(--border-soft)]">
+              {project.deliverables.map((item, idx) => (
+                <li
+                  key={item}
+                  className="grid grid-cols-[auto_1fr] items-baseline gap-5 border-b border-[var(--border-soft)] py-4 last:border-b-0"
+                >
+                  <span className="num text-sm text-[var(--accent-color)] opacity-80">
+                    D.{String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-sm leading-7 text-[var(--primary-text)]">
+                    {item}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </article>
+
+          <article className="panel neon-ring rounded-2xl p-8 md:p-10">
+            <div className="section-divider mb-6">
+              <span className="section-divider__index num">§ 04</span>
+              <span>{dict.outcomesTitle}</span>
+            </div>
+            <ol className="space-y-0 border-t border-[var(--border-soft)]">
+              {project.outcomes.map((item, idx) => (
+                <li
+                  key={item}
+                  className="grid grid-cols-[auto_1fr] items-baseline gap-5 border-b border-[var(--border-soft)] py-4 last:border-b-0"
+                >
+                  <span className="num text-sm text-[var(--accent-color)]">
+                    R.{String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-sm leading-7 text-[var(--primary-text)]">
+                    {item}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </article>
+        </div>
+      </section>
+
+      {/* ===================== CTA ===================== */}
+      <section className="border-t border-[var(--border-soft)] bg-[var(--bg-surface)]">
+        <div className="mx-auto w-full max-w-7xl px-6 py-14 md:px-10">
+          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+            <p className="text-sm text-[var(--secondary-text)]">
+              {dict.cta}
+            </p>
+            <Link
+              href={`/${locale}/contacts`}
+              className="btn-action neon-ring"
+            >
+              {dict.ctaLink}
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

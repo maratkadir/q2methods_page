@@ -81,6 +81,44 @@ export const de: Dictionary = {
           "Use-Case-Identifikation, schnelle MVP-Lieferung und kontrollierte Produktivintegration",
       },
     ],
+    framework: {
+      eyebrow: "Abgedeckte Rahmenwerke",
+    },
+    sections: {
+      whoWeServe: "Für wen wir arbeiten",
+      whatWeDeliver: "Was wir liefern",
+      atAGlance: "Auf einen Blick",
+      selectedOutcomes: "Ausgewählte Ergebnisse",
+    },
+    whoWeServeIntro:
+      "Drei institutionelle Segmente, eine Quant-Disziplin. Jedes Mandat orientiert sich am Aufsichtsregime, dem Governance-Takt und der Entscheidungsdynamik des Gegenübers.",
+    kpiLabels: [
+      "Engagement-Themen",
+      "Senior Partner",
+      "Regulatorische Rahmenwerke",
+      "Geografischer Fokus",
+    ],
+    outcomes: {
+      heading: "Messbar, anonymisiert, auf ein Mandat zurückführbar.",
+      intro:
+        "Jede Zahl unten entstammt einem realen Mandat auf der Projektseite. Wir veröffentlichen keine hypothetischen Ergebnisse.",
+      labels: [
+        "KI-Überwachung – Reduktion Fehlalarme",
+        "Reportingzyklus-Verkürzung",
+        "Manuelle Bearbeitung ersetzt",
+        "T+1-Readiness-Programm",
+      ],
+      view: "Mandat ansehen →",
+    },
+    closingCta: {
+      eyebrow: "Mandat starten",
+      heading:
+        "Ein 30-minütiges Gespräch genügt meist, um den nächsten Schritt zu klären.",
+      intro:
+        "Vorabqualifizierung über den KI-Twin oder direkte Ansprache der Partner. Wir antworten innerhalb eines Werktages.",
+      contact: "Partner kontaktieren",
+      twin: "Mit KI-Twin sprechen",
+    },
   },
   about: {
     metaTitle: "Über uns | Q2Methods",

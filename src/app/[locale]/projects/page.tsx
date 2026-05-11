@@ -21,52 +21,92 @@ export default async function ProjectsPage({ params }: Props) {
   const projects = getProjectsForLocale(locale);
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-6 py-16 md:px-10">
-      <section className="panel rounded-2xl p-8">
-        <p className="text-xs tracking-[0.2em] text-[var(--accent-color)] uppercase">
-          {dict.badge}
-        </p>
-        <h1 className="mt-3 text-4xl font-semibold text-[var(--primary-text)] md:text-5xl">
-          {dict.title}
-        </h1>
-        <p className="text-secondary mt-6 max-w-4xl text-base leading-8">
-          {dict.intro}
-        </p>
-        <p className="text-secondary mt-4 max-w-4xl text-xs leading-6 italic">
-          {dict.disclaimer}
-        </p>
-      </section>
-
-      <section className="mt-10 grid gap-5 md:grid-cols-2">
-        {projects.map((project) => (
-          <Link
-            key={project.slug}
-            href={`/${locale}/projects/${project.slug}`}
-            className="panel rounded-2xl p-6 block transition hover:border-[var(--accent-color)] hover:shadow-[0_0_0_1px_rgba(56,161,105,0.4)] group"
+    <>
+      {/* ===================== INTRO ===================== */}
+      <div className="hero-grid hero-grid-fade">
+        <section className="relative mx-auto w-full max-w-7xl overflow-hidden px-6 py-20 md:px-10 md:py-24">
+          <span
+            aria-hidden="true"
+            className="glyph-watermark glyph-watermark--accent right-[-1rem] top-[-3rem] md:right-[4rem] md:top-[-4rem]"
           >
-            <div className="flex flex-wrap gap-2 mb-3">
-              {project.tags.slice(0, 3).map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full border border-[var(--accent-color)]/30 px-2.5 py-0.5 text-xs text-[var(--accent-color)]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h2 className="text-xl font-semibold text-[var(--primary-text)] group-hover:text-[var(--accent-color)] transition">
-              {project.title}
-            </h2>
-            <p className="text-secondary mt-1 text-xs">{project.clientType}</p>
-            <p className="text-secondary mt-3 text-sm leading-7">
-              {project.summary}
+            Σ
+          </span>
+
+          <div className="relative max-w-4xl">
+            <p className="eyebrow reveal-up reveal-up-1">{dict.badge}</p>
+            <h1 className="hero-title reveal-up reveal-up-2 mt-6">
+              {dict.title}
+            </h1>
+            <p className="text-secondary reveal-up reveal-up-3 mt-6 max-w-3xl text-lg leading-8">
+              {dict.intro}
             </p>
-            <p className="mt-4 text-sm text-[var(--accent-color)]">
-              {dict.readMore}
+            <p className="text-secondary reveal-up reveal-up-4 num mt-4 max-w-3xl text-xs leading-6 italic">
+              <span className="terminal-bracket">→</span> {dict.disclaimer}
             </p>
-          </Link>
-        ))}
+          </div>
+        </section>
+      </div>
+
+      {/* ===================== PROJECT GRID ===================== */}
+      <section className="border-t border-[var(--border-soft)] bg-[var(--bg-surface)]">
+        <div className="mx-auto w-full max-w-7xl px-6 py-20 md:px-10 md:py-24">
+          <div className="section-divider mb-10">
+            <span className="section-divider__index num">§ 01</span>
+            <span>Engagement themes</span>
+            <span className="num text-[var(--secondary-text)] opacity-60">
+              N={projects.length}
+            </span>
+          </div>
+
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-[var(--border-soft)] bg-[var(--border-soft)] md:grid-cols-2">
+            {projects.map((project, idx) => (
+              <Link
+                key={project.slug}
+                href={`/${locale}/projects/${project.slug}`}
+                className="group relative flex flex-col bg-[var(--bg-surface)] p-7 transition hover:bg-[#fbfdfe] md:p-8"
+              >
+                <div className="flex items-baseline justify-between">
+                  <span className="mono-tag mono-tag--accent">
+                    M-{String(idx + 1).padStart(2, "0")}
+                  </span>
+                  <span className="num text-[0.7rem] text-[var(--secondary-text)] opacity-60">
+                    {String(idx + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+                  </span>
+                </div>
+
+                <h2 className="mt-5 text-xl leading-tight font-semibold text-[var(--primary-text)] transition group-hover:text-[var(--accent-color)] md:text-2xl">
+                  {project.title}
+                </h2>
+
+                <p className="num mt-2 text-[0.72rem] text-[var(--accent-color)] opacity-90">
+                  {project.clientType}
+                </p>
+
+                <div className="my-5 h-px bg-[var(--border-soft)]" />
+
+                <p className="text-secondary text-sm leading-7">
+                  {project.summary}
+                </p>
+
+                <div className="mt-6 flex flex-wrap gap-x-4 gap-y-1">
+                  {project.tags.slice(0, 4).map((tag) => (
+                    <span key={tag} className="mono-tag">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex items-center justify-between">
+                  <span className="num text-[0.75rem] text-[var(--accent-color)] opacity-0 transition group-hover:opacity-100">
+                    {dict.readMore}
+                  </span>
+                  <span className="h-px w-8 bg-[var(--accent-color)] opacity-40 transition-all duration-300 group-hover:w-20 group-hover:opacity-80" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </section>
-    </div>
+    </>
   );
 }

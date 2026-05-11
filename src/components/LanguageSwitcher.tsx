@@ -34,7 +34,7 @@ export function LanguageSwitcher({ current, label }: Props) {
     <div
       role="group"
       aria-label={label}
-      className="flex items-center gap-1 rounded-full border border-white/15 bg-[var(--navbar-bg)] px-1 py-0.5 text-xs font-semibold"
+      className="flex items-center gap-0.5 rounded-full border border-white/15 bg-black/15 p-0.5 font-mono text-[0.65rem]"
     >
       {locales.map((locale) => {
         const isActive = locale === current;
@@ -46,8 +46,8 @@ export function LanguageSwitcher({ current, label }: Props) {
             aria-pressed={isActive}
             className={
               isActive
-                ? "rounded-full bg-[var(--accent-color)] px-2.5 py-0.5 text-[var(--accent-text)]"
-                : "rounded-full px-2.5 py-0.5 text-[var(--secondary-text)] transition hover:text-[var(--accent-color)]"
+                ? "rounded-full bg-[var(--accent-color)] px-2.5 py-1 font-semibold tracking-wider text-[var(--accent-text)] uppercase"
+                : "rounded-full px-2.5 py-1 tracking-wider text-white/60 uppercase transition hover:text-[var(--accent-color)]"
             }
           >
             {localeLabels[locale]}
