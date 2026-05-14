@@ -65,6 +65,7 @@ h1 {
 
 /* ===== Identity anchors (do not erase) ===== */
 .hero-grid {
+  position: relative;
   background-color: var(--bg-color);
   background-image:
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
@@ -72,7 +73,23 @@ h1 {
   background-size: 28px 28px;
 }
 
+/* Fade only the decorative grid background, not the content inside.
+   Mask must be applied to a pseudo-element so children (CTA buttons,
+   text) remain fully opaque. */
 .hero-grid-fade {
+  background-image: none;
+}
+
+.hero-grid-fade::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
   -webkit-mask-image: linear-gradient(
     to bottom,
     #000 0%,
@@ -80,6 +97,11 @@ h1 {
     transparent 100%
   );
   mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
+}
+
+.hero-grid-fade > * {
+  position: relative;
+  z-index: 1;
 }
 
 .neon-ring {
@@ -515,6 +537,64 @@ h1 {
   flex-wrap: wrap;
   gap: 0.45rem 1.1rem;
   align-items: center;
+}
+
+/* Infinite-loop marquee for the regulatory frameworks strip.
+   Two identical groups translate by -50% so the seam is invisible. */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 6%,
+    black 94%,
+    transparent 100%
+  );
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+  will-change: transform;
+}
+
+.marquee__group {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding-right: 1.1rem;
+  flex-shrink: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
 }
 
 /* ===== Links ===== */

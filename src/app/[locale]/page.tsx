@@ -156,17 +156,29 @@ export default async function Home({ params }: Props) {
             <span className="text-[var(--secondary-text)]">/</span>
             {dict.framework.eyebrow}
           </p>
-          <div className="tag-strip">
-            {FRAMEWORKS.map((fw) => (
-              <Link
-                key={fw.label}
-                href={`/${locale}/projects/${fw.slug}`}
-                className="mono-tag mono-tag--link"
-                aria-label={`${fw.label} — view related engagement`}
-              >
-                {fw.label}
-              </Link>
-            ))}
+          <div className="marquee min-w-0 flex-1">
+            <div className="marquee__track">
+              {[0, 1].map((copy) => (
+                <ul
+                  key={copy}
+                  className="marquee__group"
+                  aria-hidden={copy === 1 ? "true" : undefined}
+                >
+                  {FRAMEWORKS.map((fw) => (
+                    <li key={`${copy}-${fw.label}`}>
+                      <Link
+                        href={`/${locale}/projects/${fw.slug}`}
+                        className="mono-tag mono-tag--link"
+                        aria-label={`${fw.label} — view related engagement`}
+                        tabIndex={copy === 1 ? -1 : undefined}
+                      >
+                        {fw.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
           </div>
         </div>
       </section>
